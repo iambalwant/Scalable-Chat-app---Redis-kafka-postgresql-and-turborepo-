@@ -10,6 +10,11 @@ Run the following command:
 npx create-turbo@latest
 ```
 
+```sh
+npm install typescript --workspace=server  --save-dev
+```
+
+
 ## What's inside?
 
 This Turborepo includes the following packages/apps:
