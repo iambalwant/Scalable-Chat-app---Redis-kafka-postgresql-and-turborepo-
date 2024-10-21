@@ -11,7 +11,7 @@ npx create-turbo@latest
 ```
 
 ```sh
-npm install typescript --workspace=server  --save-dev
+npm install {devdepencey} --workspace=server  --save-dev
 ```
 
 
