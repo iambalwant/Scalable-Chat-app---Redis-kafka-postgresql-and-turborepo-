@@ -5,7 +5,7 @@
     "scripts": {
         "start": "node dist/index",
         "build": "tsc -p .",
-        "dev": "tsc-watch --onSuccess \"node dis/index.js\""
+        "dev": "tsc-watch --onSuccess \"node dist/index.js\""
     },
     "devDependencies": {
         "socket.io": "^4.8.0",
