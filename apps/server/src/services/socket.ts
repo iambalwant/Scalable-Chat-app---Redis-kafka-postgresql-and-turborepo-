@@ -1,4 +1,14 @@
 import {Server} from 'socket.io'
+import Redis from 'ioredis'
+
+const pub = new Redis({
+  host:'0.0.0.0',
+  port: 6379
+});
+const sub = new Redis({
+  host:'0.0.0.0',
+  port: 6379
+});
 
 class SocketService {
     
@@ -12,6 +22,7 @@ class SocketService {
             origin: '*'
         },
       });
+      sub.subscribe("MESSAGES")
     }
 
     public initListeners() {
@@ -21,8 +32,17 @@ class SocketService {
              console.log(`New socket connected ID:${socket.id}`)
              socket.on('event:message', async ({message}:{message: string}) =>{
              console.log('New message Recive.', message)
+             //pubish this message to redis
+                                //channel | what we have to send
+             await pub.publish('MESSAGES', JSON.stringify({message}))
              });
         });
+
+        sub.on('message', (channel, message) =>{
+           if(channel === "MESSAGES"){
+              io.emit('message', message);
+           } 
+        })
     }
 
     get io(){
