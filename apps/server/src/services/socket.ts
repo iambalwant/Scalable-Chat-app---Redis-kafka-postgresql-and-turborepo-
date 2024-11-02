@@ -1,5 +1,6 @@
 import {Server} from 'socket.io'
 import Redis from 'ioredis'
+import prismaClinet from './prisma';
 
 const pub = new Redis({
   host:'0.0.0.0',
@@ -38,9 +39,14 @@ class SocketService {
              });
         });
 
-        sub.on('message', (channel, message) =>{
+        sub.on('message', async (channel, message) =>{
            if(channel === "MESSAGES"){
               io.emit('message', message);
+              await prismaClinet.message.create({
+                data:{
+                  text: message,
+                },
+              });
            } 
         })
     }
