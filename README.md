@@ -14,6 +14,9 @@ npx create-turbo@latest
 npm install {devdepencey} --workspace=server  --save-dev
 ```
 
+```sh
+docker run -d -p 9092:9092 -e KAFKA_ZOOKEEPER_CONNECT=192.168.51.73:2181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.51.73:9092 -e KAFKA_OFFSET_TOPIC_REPLICATION_FACTOR=1 confluentinc/cp-kafka
+```
 
 ## What's inside?
 

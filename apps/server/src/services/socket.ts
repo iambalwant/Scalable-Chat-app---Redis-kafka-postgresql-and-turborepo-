@@ -1,6 +1,7 @@
 import {Server} from 'socket.io'
 import Redis from 'ioredis'
 import prismaClinet from './prisma';
+import {createProducer} from './kafka'
 
 const pub = new Redis({
   host:'0.0.0.0',
