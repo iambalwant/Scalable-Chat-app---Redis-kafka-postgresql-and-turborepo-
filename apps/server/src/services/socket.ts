@@ -1,7 +1,7 @@
 import {Server} from 'socket.io'
 import Redis from 'ioredis'
 import prismaClinet from './prisma';
-import {createProducer} from './kafka'
+import { produceMessages } from './kafka'
 
 const pub = new Redis({
   host:'0.0.0.0',
@@ -43,13 +43,10 @@ class SocketService {
         sub.on('message', async (channel, message) =>{
            if(channel === "MESSAGES"){
               io.emit('message', message);
-              await prismaClinet.message.create({
-                data:{
-                  text: message,
-                },
-              });
+              await produceMessages(message);
+              console.log("Message Produced to kafka broker !!")
            } 
-        })
+        });
     }
 
     get io(){
