@@ -2,7 +2,8 @@ import {Kafka, Producer} from 'kafkajs'
 import prismaClinet from './prisma';
 
 const kafka = new Kafka({
-    brokers:['192.168.73.73:9092'],
+    //put your local ip address when we running on docker 
+    brokers:['0.0.0.0:9092'],
 })
 
 let producer: null | Producer = null 
